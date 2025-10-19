@@ -5,6 +5,7 @@
   --accent2:#06b6d4;
   --btn:#1f2130;
   --muted:#9aa0b4;
+  --text:#e6eef8;
   --glass: rgba(255,255,255,0.04);
 }
 *{box-sizing:border-box}
@@ -17,7 +18,7 @@ body{
   align-items:center;
   justify-content:center;
   padding:32px;
-  color:#e6eef8;
+  color:var(--text);
 }
 .calculator{
   width:360px;
@@ -40,7 +41,7 @@ body{
   padding:16px;
   font-size:28px;
   font-weight:600;
-  color:#f8fafc;
+  color:var(--text);
   margin-bottom:14px;
   user-select:none;
 }
@@ -55,7 +56,7 @@ body{
 }
 .btn{
   background:var(--btn);
-  color:var(--muted);
+  color:var(--text);
   border:0;
   border-radius:10px;
   padding:18px 12px;
@@ -77,10 +78,13 @@ body{
   .btn{padding:14px}
 }
 
-/* light theme */
+/* light theme: soft creamy yellow background and black text */
 :root.light{
-  --bg:#f3f4f6;
-  --panel:#ffffff;
-  --btn:#eef2ff;
-  --muted:#334155;
+  --bg:#fff7d6; /* soft creamy yellow page background */
+  --panel:#fff9e6; /* panel slightly lighter */
+  --btn:#fff3c9; /* button background */
+  --muted:#334155; /* secondary muted color */
+  --text:#000000; /* primary text black for readability */
+  --accent1:#7c3aed;
+  --accent2:#06b6d4;
 }
