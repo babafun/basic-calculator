@@ -1,0 +1,27 @@
+# Node / JS stuff (optional if you later add packages)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Docker stuff
+# You usually *don’t* need to commit built images or volumes
+*.tar
+docker-compose.override.yml
+docker-compose.override.yaml
+*.env
+
+# IDE / editor files
+.vscode/
+*.code-workspace
+
+# Python / other random stuff (just in case)
+__pycache__/
+*.pyc
+*.pyo

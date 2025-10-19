@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    image: babafun/basic-calculator:latest
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    environment:
+      - NGINX_HOST=0.0.0.0
