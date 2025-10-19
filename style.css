@@ -6,6 +6,14 @@
   --btn:#1f2130;
   --muted:#9aa0b4;
   --text:#e6eef8;
+  /* gradient endpoints to build the page background */
+  --bg-start: #0f1020;
+  --bg-end: #0b1220;
+  /* button/bg variables (can be overridden in light theme) */
+  --btn-bg: var(--btn);
+  --btn-text: var(--text);
+  --op-bg: linear-gradient(135deg,var(--accent1),var(--accent2));
+  --op-text: #fff;
   --glass: rgba(255,255,255,0.04);
 }
 *{box-sizing:border-box}
@@ -13,7 +21,7 @@ html,body{height:100%;}
 body{
   margin:0;
   font-family:'Poppins',system-ui,Segoe UI,Roboto,Arial,sans-serif;
-  background:linear-gradient(135deg,var(--bg),#0b1220 60%);
+  background: linear-gradient(135deg,var(--bg-start),var(--bg-end) 60%);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -55,8 +63,8 @@ body{
   gap:10px;
 }
 .btn{
-  background:var(--btn);
-  color:var(--text);
+  background:var(--btn-bg);
+  color:var(--btn-text);
   border:0;
   border-radius:10px;
   padding:18px 12px;
@@ -67,8 +75,8 @@ body{
 }
 .btn:active{transform:translateY(2px)}
 .btn:hover{color:#fff}
-.btn-op{background:linear-gradient(135deg,var(--accent1),var(--accent2)); color:#fff}
-.btn-eq{grid-row:3 / span 1; grid-column:4 / span 1; background: linear-gradient(135deg,#06b6d4,#3b82f6); color:#fff}
+.btn-op{background: var(--op-color, linear-gradient(135deg,var(--accent1),var(--accent2))); color: var(--op-text, #fff)}
+.btn-eq{grid-row:3 / span 1; grid-column:4 / span 1; background: linear-gradient(135deg,#06b6d4,#3b82f6); color:var(--op-text, #fff)}
 .btn-ac{background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,0.03)}
 .btn-zero{grid-column:1 / span 2}
 .btn-dot{grid-column:3 / span 1}
@@ -80,11 +88,20 @@ body{
 
 /* light theme: soft creamy yellow background and black text */
 :root.light{
-  --bg:#fff7d6; /* soft creamy yellow page background */
-  --panel:#fff9e6; /* panel slightly lighter */
-  --btn:#fff3c9; /* button background */
+  /* creamy white -> creamy orange gradient for page background */
+  --bg-start: #fffaf3; /* creamy white */
+  --bg-end: #ffe6cc; /* creamy orange */
+  /* calculator panel slightly darker than page */
+  --panel:#fff3e0;
+  /* number buttons: light grey background with black text */
+  --btn-bg: #f0f0f0;
+  --btn-text: #000000;
+  /* operation buttons: orange background with white text */
+  --op-color: #ff8a1f;
+  --op-text: #ffffff;
   --muted:#334155; /* secondary muted color */
   --text:#000000; /* primary text black for readability */
-  --accent1:#7c3aed;
-  --accent2:#06b6d4;
+  /* accents remain for subtle gradients if used */
+  --accent1:#ff8a1f;
+  --accent2:#ffb366;
 }
