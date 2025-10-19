@@ -32,20 +32,97 @@
 
   function compute(){
     if(!operator || previous === null) return;
-    const a = parseFloat(previous);
-    const b = parseFloat(current);
-    let result = NaN;
-    switch(operator){
-      case 'add': result = a + b; break;
-      case 'subtract': result = a - b; break;
-      case 'multiply': result = a * b; break;
-      case 'divide': result = b === 0 ? NaN : a / b; break;
+
+    // Precise arithmetic for large numbers using BigInt-based string math
+    function parseNumberStr(s){
+      // s is a string like "-123.45" or "0" etc.
+      const sign = s.trim().startsWith('-') ? -1 : 1;
+      const ns = s.trim().replace(/^\+/, '');
+      const parts = ns.replace(/^\+/, '').replace(/^\-/, '').split('.');
+      const intPart = parts[0] || '0';
+      const decPart = parts[1] || '';
+      const digits = (intPart + decPart).replace(/^0+(?=\d)|^$/, (m)=> m);
+      // remove leading zeros but keep single zero
+      const digitsNormalized = digits.replace(/^0+(?!$)/, '') || '0';
+      return { sign, intPart, decPart, digits: digitsNormalized, decLen: decPart.length };
     }
-    if(!isFinite(result) || isNaN(result)){
+
+    function bigIntFromParts(parts){
+      // returns BigInt of combined digits
+      return BigInt(parts.digits);
+    }
+
+    function formatResult(bigIntVal, decLen, sign){
+      let s = bigIntVal.toString();
+      if(decLen > 0){
+        // ensure s has at least decLen+1 digits for proper placement
+        if(s.length <= decLen){
+          s = s.padStart(decLen + 1, '0');
+        }
+        const intPortion = s.slice(0, s.length - decLen);
+        let decPortion = s.slice(s.length - decLen);
+        // trim trailing zeros from decimal
+        decPortion = decPortion.replace(/0+$/,'');
+        if(decPortion === '') s = intPortion; else s = intPortion + '.' + decPortion;
+      }
+      // remove leading zeros from integer portion except single zero
+      s = s.replace(/^0+(?=\d)/, '');
+      if(s === '') s = '0';
+      if(sign < 0 && s !== '0') s = '-' + s;
+      return s;
+    }
+
+    function computePrecise(aStr, bStr, op){
+      const A = parseNumberStr(aStr);
+      const B = parseNumberStr(bStr);
+
+      if(op === 'add' || op === 'subtract'){
+        const maxDec = Math.max(A.decLen, B.decLen);
+        const scaleA = 10n ** BigInt(maxDec - A.decLen);
+        const scaleB = 10n ** BigInt(maxDec - B.decLen);
+        const aInt = bigIntFromParts(A) * scaleA * BigInt(A.sign);
+        const bInt = bigIntFromParts(B) * scaleB * BigInt(B.sign);
+        const res = op === 'add' ? aInt + bInt : aInt - bInt;
+        const sign = res < 0n ? -1 : 1;
+        const abs = res < 0n ? -res : res;
+        return formatResult(abs, maxDec, sign);
+      }
+
+      if(op === 'multiply'){
+        const aInt = bigIntFromParts(A) * BigInt(A.sign);
+        const bInt = bigIntFromParts(B) * BigInt(B.sign);
+        const res = aInt * bInt;
+        const decLen = A.decLen + B.decLen;
+        const sign = res < 0n ? -1 : 1;
+        const abs = res < 0n ? -res : res;
+        return formatResult(abs, decLen, sign);
+      }
+
+      if(op === 'divide'){
+        const aInt = bigIntFromParts(A) * BigInt(A.sign);
+        const bInt = bigIntFromParts(B) * BigInt(B.sign);
+        if(bInt === 0n) return null; // division by zero => Error
+        // Determine if division is exact by aligning decimals
+        const scale = 10n ** BigInt(Math.max(0, B.decLen - A.decLen));
+        // We'll compute with extra precision
+        const PREC = 20; // decimal places
+        const scaleFactor = 10n ** BigInt(PREC + B.decLen - A.decLen);
+        const numerator = BigInt(A.digits) * scaleFactor * BigInt(A.sign);
+        const denominator = BigInt(B.digits) * BigInt(B.sign);
+        const quotient = numerator / denominator; // BigInt
+        const sign = quotient < 0n ? -1 : 1;
+        const abs = quotient < 0n ? -quotient : quotient;
+        // quotient represents value scaled by 10^PREC
+        return formatResult(abs, PREC, sign);
+      }
+      return null;
+    }
+
+    const res = computePrecise(previous, current, operator);
+    if(res === null){
       current = 'Error';
     } else {
-      // format: trim to 10 significant digits
-      current = String(parseFloat(result.toPrecision(10))).replace(/\.0+$/,'');
+      current = res;
     }
     operator = null; previous = null; overwrite = true; updateDisplay();
   }
