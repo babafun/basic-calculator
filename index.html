@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LightningCalc</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="calculator" role="application" aria-label="Calculator">
+    <header class="calc-header">
+      <div class="brand">LightningCalc</div>
+      <div class="header-controls">
+        <button id="themeToggle" class="btn btn-small" aria-pressed="false" aria-label="Toggle theme">🌙</button>
+        <button id="historyToggle" class="btn btn-small" aria-expanded="false" aria-controls="historyPanel" aria-label="Toggle history">📜</button>
+      </div>
+    </header>
+
+    <div class="display" id="display" aria-live="polite">0</div>
+    <div id="historyPanel" class="history-panel" aria-hidden="true">
+      <div class="history-header">
+        <strong>History</strong>
+        <button id="clearHistory" class="btn btn-small" aria-label="Clear history">Clear</button>
+      </div>
+      <ul id="historyList" class="history-list" aria-live="polite"></ul>
+    </div>
+    <div class="controls">
+      <button class="btn btn-ac" data-action="clear" aria-label="Clear">AC</button>
+      <button class="btn btn-op" data-action="divide" aria-label="Divide">÷</button>
+      <button class="btn btn-op" data-action="multiply" aria-label="Multiply">×</button>
+      <button class="btn btn-op" data-action="subtract" aria-label="Subtract">−</button>
+
+      <button class="btn" data-value="7">7</button>
+      <button class="btn" data-value="8">8</button>
+      <button class="btn" data-value="9">9</button>
+      <button class="btn btn-op" data-action="add" aria-label="Add">+</button>
+
+      <button class="btn" data-value="4">4</button>
+      <button class="btn" data-value="5">5</button>
+      <button class="btn" data-value="6">6</button>
+      <button class="btn btn-eq" data-action="equals" aria-label="Equals">=</button>
+
+      <button class="btn" data-value="1">1</button>
+      <button class="btn" data-value="2">2</button>
+      <button class="btn" data-value="3">3</button>
+      <button class="btn btn-zero" data-value="0">0</button>
+
+      <button class="btn btn-dot" data-value=".">.</button>
+    </div>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
