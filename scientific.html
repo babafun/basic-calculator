@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LightningCalc — Scientific</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/scientific.css">
+</head>
+<body>
+  <nav class="top-nav">
+    <div class="nav-inner">
+      <div class="nav-brand">LightningCalc</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Basic</a></li>
+        <li><a href="scientific.html" aria-current="page">Scientific</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="calculator scientific" role="application" aria-label="Scientific Calculator">
+    <section class="sci-intro">
+      <h1>LightningCalc — Scientific</h1>
+      <p>Landscape layout: advanced panels on the left, main arithmetic on the right. Uses Decimal.js when available for higher precision.</p>
+    </section>
+
+    <section class="sci-sandbox">
+      <div class="sci-merged">
+        <div class="left">
+        <section class="panel" id="panel-trig" aria-label="Trigonometry">
+          <h3>Trigonometry</h3>
+          <div class="panel-controls">
+            <button class="btn" data-op="sin">sin</button>
+            <button class="btn" data-op="cos">cos</button>
+            <button class="btn" data-op="tan">tan</button>
+            <button class="btn" data-op="asin">asin</button>
+
+            <button class="btn" data-op="acos">acos</button>
+            <button class="btn" data-op="atan">atan</button>
+            <button class="btn" data-op="deg">Deg</button>
+            <button class="btn" data-op="rad">Rad</button>
+          </div>
+        </section>
+
+        <section class="panel" id="panel-expo" aria-label="Exponents and logs">
+          <h3>Exponents / Logs</h3>
+          <div class="panel-controls">
+            <button class="btn" data-op="square">x²</button>
+            <button class="btn" data-op="pow">xʸ</button>
+            <button class="btn" data-op="sqrt">√</button>
+            <button class="btn" data-op="ln">ln</button>
+
+            <button class="btn" data-op="log10">log10</button>
+            <button class="btn" data-op="exp">exp</button>
+            <button class="btn" data-op="pi">π</button>
+            <button class="btn" data-op="e">e</button>
+          </div>
+        </section>
+
+        <section class="panel" id="panel-percent" aria-label="Percent and ratio">
+          <h3>Percent / Ratio</h3>
+          <div class="panel-controls">
+            <button class="btn" data-op="percent">%</button>
+            <button class="btn" data-op="ratio">a:b→%</button>
+            <button class="btn" data-op="invratio">%→a:b</button>
+            <button class="btn" data-op="mod">mod</button>
+
+            <button class="btn" data-op="frac">1/x</button>
+            <div class="spacer"></div>
+            <div class="spacer"></div>
+            <div class="spacer"></div>
+          </div>
+        </section>
+
+        <section class="panel" id="panel-calculus" aria-label="Calculus">
+          <h3>Calculus</h3>
+          <div class="panel-controls">
+            <button class="btn" data-op="deriv">d/dx (num)</button>
+            <button class="btn" data-op="integrate">∫ (num)</button>
+            <button class="btn" data-op="diff">diff</button>
+            <button class="btn" data-op="sum">Σ</button>
+
+            <div class="spacer"></div>
+            <div class="spacer"></div>
+            <div class="spacer"></div>
+            <div class="spacer"></div>
+          </div>
+        </section>
+        </div>
+
+        <div class="right">
+        <div class="display" id="sci-display" aria-live="polite">0</div>
+
+        <div class="controls sci-main-controls" aria-hidden="false">
+          <button class="btn" data-value="7">7</button>
+          <button class="btn" data-value="8">8</button>
+          <button class="btn" data-value="9">9</button>
+          <button class="btn btn-op" data-action="divide">÷</button>
+
+          <button class="btn" data-value="4">4</button>
+          <button class="btn" data-value="5">5</button>
+          <button class="btn" data-value="6">6</button>
+          <button class="btn btn-op" data-action="multiply">×</button>
+
+          <button class="btn" data-value="1">1</button>
+          <button class="btn" data-value="2">2</button>
+          <button class="btn" data-value="3">3</button>
+          <button class="btn btn-op" data-action="subtract">−</button>
+
+          <button class="btn" data-value="0">0</button>
+          <button class="btn" data-value=".">.</button>
+          <button class="btn btn-eq" data-action="equals">=</button>
+          <button class="btn btn-ac" data-action="clear">AC</button>
+        </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/decimal.min.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/panels/trig.js"></script>
+  <script src="js/panels/exponents.js"></script>
+  <script src="js/panels/percent.js"></script>
+  <script src="js/panels/calculus.js"></script>
+  <script src="js/scientific-main.js"></script>
+</body>
+</html>

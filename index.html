@@ -7,9 +7,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/basic.css">
 </head>
 <body>
+  <nav class="top-nav">
+    <div class="nav-inner">
+      <div class="nav-brand">LightningCalc</div>
+      <ul class="nav-links">
+        <li><a href="index.html" aria-current="page">Basic</a></li>
+        <li><a href="scientific.html">Scientific</a></li>
+      </ul>
+    </div>
+  </nav>
   <main class="calculator" role="application" aria-label="Calculator">
     <header class="calc-header">
       <div class="brand">LightningCalc</div>
@@ -51,6 +60,7 @@
       <button class="btn btn-dot" data-value=".">.</button>
     </div>
   </main>
-  <script src="app.js"></script>
+  <script src="js/decimal.min.js"></script>
+  <script src="js/basic.js"></script>
 </body>
 </html>

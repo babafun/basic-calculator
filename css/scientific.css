@@ -155,7 +155,9 @@ main.calculator{margin-top:64px}
 .sci-sandbox{padding:18px}
 .sci-merged{display:grid;grid-template-columns:300px 1fr;gap:18px;align-items:start}
 .sci-merged .left{display:grid;grid-auto-rows:auto;gap:12px;padding-right:12px}
-.sci-merged .right{display:flex;flex-direction:column;gap:12px}
+.sci-merged .right{display:flex;flex-direction:column;gap:12px;align-self:start;justify-content:flex-start}
+.sci-merged .right .display{width:100%}
+.sci-merged .right .controls{margin-top:0}
 .sci-merged{position:relative}
 .sci-merged{display:grid;grid-template-columns:1fr var(--sci-right-width);gap:18px;align-items:start}
 .sci-merged .right{display:flex;flex-direction:column;gap:12px;align-self:start}
